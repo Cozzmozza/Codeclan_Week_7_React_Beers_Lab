@@ -20,6 +20,17 @@ const BeerContainer = () => {
 
     const onSelectedBeer = (beer) => setSelectedBeer(beer);
 
+    const beerChecker = (beerToCheck) => {
+        const found = favouriteBeers.find((beer) => {
+            return beer.name === beerToCheck.name
+        })
+        if (found === true){
+            removeFavouriteBeer(beerToCheck)
+        }
+        else {addFavouriteBeer(beerToCheck)
+        }
+    };
+
     const addFavouriteBeer = (newFavouriteBeer) => {
         const updatedFavouriteBeers = [...favouriteBeers, newFavouriteBeer];
         setFavouriteBeers(updatedFavouriteBeers);
@@ -30,30 +41,12 @@ const BeerContainer = () => {
         setFavouriteBeers(updatedFavouriteBeers);
     }
 
-    // const beerChecker = (beer) => {
-    //     const ifFound = favouriteBeers.find((beer) => {
-    //     if (ifFound === true){
-    //         removeFavouriteBeer(beer)
-    //     }
-        
-    //         // addFavouriteBeer(beer)
-        
-    // })
-    // }
-
-    // const found = array1.find(element => element > 10);
-
-    // const beerChecker = (beer) => {favouriteBeers.find(beer => beer)}
-    //     const found = favouriteBeers.find(beer => beer)
-    // }
-
     return(
         <div>
             <BeerSelect beers={beers} onSelectedBeer={onSelectedBeer}/>
             {selectedBeer ? <BeerDetail selectedBeer={selectedBeer} beerChecker={beerChecker}/> : null}
 
             {favouriteBeers.length > 0 ? <BeerFavourites favouriteBeers={favouriteBeers} /> : null}
-            {/* <BeerFavourites favouriteBeers={favouriteBeers} /> */}
         
         </div>
     )
